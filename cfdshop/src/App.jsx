@@ -16,30 +16,31 @@ import Products from "./pages/Product";
 import ProductDetail from "./pages/Product/Product-detail";
 import ReturnPage from "./pages/Returns";
 import ShippingPage from "./pages/Shipping";
+import { PATHS } from "./config/path";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/blogs" element={<BlogsPage />} />
-          <Route path="/blog-detail" element={<BlogDetailPage />} />
-          <Route path="/checkout" element={<CheckOutPage />} />
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/contact-us" element={<ContactUsPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/payment" element={<PaymentMethodPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/detail" element={<ProductDetail />} />
-          <Route path="/return" element={<ReturnPage />} />
-          <Route path="/shipping" element={<ShippingPage />} />
+        <Route path={PATHS.HOME} element={<MainLayout />}>
+          <Route path={PATHS.HOME} element={<HomePage />} />
+          <Route path={PATHS.ABOUT} element={<AboutUs />} />
+          <Route path={PATHS.BLOGS} element={<BlogsPage />} />
+          <Route path={PATHS.BLOGS_DETAIL} element={<BlogDetailPage />} />
+          <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
+          <Route path={PATHS.SUCCESS} element={<SuccessPage />} />
+          <Route path={PATHS.DASHBOARD} element={<DashboardPage />} />
+          <Route path={PATHS.CONTACT} element={<ContactUsPage />} />
+          <Route path={PATHS.FAQ} element={<FaqPage />} />
+          <Route path={PATHS.PAYMENT} element={<PaymentMethodPage />} />
+          <Route path={PATHS.PRIVACY} element={<PrivacyPage />} />
+          <Route path={PATHS.PRODUCTS} element={<Products />} />
+          <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
+          <Route path={PATHS.RETURN} element={<ReturnPage />} />
+          <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
 
           {/* Error */}
-          <Route path="*" element={<ErrorPage />} />
+          <Route path={PATHS.ERROR} element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
