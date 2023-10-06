@@ -23,4 +23,6 @@ export const PATHS = {
 
   //Error
   ERROR: "*",
+
+  //PROFILE 4 PATH
 };
