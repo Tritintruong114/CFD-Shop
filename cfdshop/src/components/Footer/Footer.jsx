@@ -1,3 +1,6 @@
+import { NavLink } from "react-router-dom";
+import { PATHS } from "../../config/path";
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -18,7 +21,7 @@ const Footer = () => {
                 </p>
                 <div className="widget-call">
                   <i className="icon-phone" /> Got Question? Call us 24/7{" "}
-                  <a href="tel:#">098 9596 912</a>
+                  <NavLink to="tel:#">098 9596 912</NavLink>
                 </div>
               </div>
             </div>
@@ -27,16 +30,16 @@ const Footer = () => {
                 <h4 className="widget-title">Useful Links</h4>
                 <ul className="widget-list">
                   <li>
-                    <a href="about.html">About Us</a>
+                    <NavLink to={PATHS.ABOUT}>About Us</NavLink>
                   </li>
                   <li>
-                    <a href="product.html">Product</a>
+                    <NavLink to={PATHS.PRODUCTS}>Product</NavLink>
                   </li>
                   <li>
-                    <a href="faq.html">FAQs</a>
+                    <NavLink to={PATHS.FAQ}>FAQs</NavLink>
                   </li>
                   <li>
-                    <a href="contact.html">Contact us</a>
+                    <NavLink to={PATHS.CONTACT}>Contact us</NavLink>
                   </li>
                 </ul>
               </div>
@@ -46,16 +49,16 @@ const Footer = () => {
                 <h4 className="widget-title">Customer Service</h4>
                 <ul className="widget-list">
                   <li>
-                    <a href="payment-methods.html">Payment Methods</a>
+                    <NavLink to={PATHS.PAYMENT}>Payment Methods</NavLink>
                   </li>
                   <li>
-                    <a href="returns.html">Returns</a>
+                    <NavLink to={PATHS.RETURN}>Returns</NavLink>
                   </li>
                   <li>
-                    <a href="shipping.html">Shipping</a>
+                    <NavLink to={PATHS.SHIPPING}>Shipping</NavLink>
                   </li>
                   <li>
-                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <NavLink to={PATHS.PRIVACY}>Privacy Policy</NavLink>
                   </li>
                 </ul>
               </div>
@@ -65,16 +68,16 @@ const Footer = () => {
                 <h4 className="widget-title">My Account</h4>
                 <ul className="widget-list">
                   <li>
-                    <a href="dashboard.html">Account Details</a>
+                    <NavLink to={PATHS.DASHBOARD}>Account Details</NavLink>
                   </li>
                   <li>
-                    <a href="cart.html">View Cart</a>
+                    <NavLink to={PATHS.CART}>View Cart</NavLink>
                   </li>
                   <li>
-                    <a href="dashboard.html">My Wishlist</a>
+                    <NavLink to={PATHS.DASHBOARD}>My Wishlist</NavLink>
                   </li>
                   <li>
-                    <a href="dashboard.html">Track My Order</a>
+                    <NavLink to={PATHS.DASHBOARD}>Track My Order</NavLink>
                   </li>
                 </ul>
               </div>
@@ -86,9 +89,13 @@ const Footer = () => {
         <div className="container">
           <p className="footer-copyright">
             Copyright © 2023{" "}
-            <a href="https://cfdcircle.vn/" target="_blank" rel="noreferrer">
+            <NavLink
+              to="https://cfdcircle.vn/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <strong>CFD Circle</strong>
-            </a>
+            </NavLink>
             . All Rights Reserved.
           </p>
           <figure className="footer-payments">

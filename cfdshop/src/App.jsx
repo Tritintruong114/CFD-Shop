@@ -17,6 +17,7 @@ import ProductDetail from "./pages/Product/Product-detail";
 import ReturnPage from "./pages/Returns";
 import ShippingPage from "./pages/Shipping";
 import { PATHS } from "./config/path";
+import CartPage from "./pages/Cart";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
           <Route path={PATHS.RETURN} element={<ReturnPage />} />
           <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
+          <Route path={PATHS.CART} element={<CartPage />} />
 
           {/* Error */}
           <Route path={PATHS.ERROR} element={<ErrorPage />} />

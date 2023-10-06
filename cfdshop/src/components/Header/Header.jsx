@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+import { PATHS } from "../../config/path";
 const Header = () => {
   return (
     <header className="header">
@@ -24,18 +26,18 @@ const Header = () => {
                   <li>
                     <ul>
                       <li>
-                        <a href="dashboard.html">Account Details</a>
+                        <NavLink to={PATHS.DASHBOARD}>Account Details</NavLink>
                       </li>
                       <li>
-                        <a href="dashboard.html">Your Orders</a>
+                        <NavLink to={PATHS.DASHBOARD}>Your Orders</NavLink>
                       </li>
                       <li>
-                        <a href="dashboard.html">
+                        <NavLink to={PATHS.DASHBOARD}>
                           Wishlist <span>(3)</span>
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
-                        <a href="#">Sign Out</a>
+                        <NavLink to={PATHS.HOME}>Sign Out</NavLink>
                       </li>
                     </ul>
                   </li>
@@ -52,26 +54,26 @@ const Header = () => {
               <span className="sr-only">Toggle mobile menu</span>
               <i className="icon-bars" />
             </button>
-            <a href="index.html" className="logo">
+            <NavLink to={PATHS.HOME} className="logo">
               <img src="assets/images/logo.svg" alt="Molla Logo" width={160} />
-            </a>
+            </NavLink>
           </div>
           <nav className="main-nav">
             <ul className="menu">
               <li className="active">
-                <a href="index.html">Home</a>
+                <NavLink to={PATHS.HOME}>Home</NavLink>
               </li>
               <li>
-                <a href="about.html">About Us</a>
+                <NavLink to={PATHS.ABOUT}>About Us</NavLink>
               </li>
               <li>
-                <a href="product.html">Product</a>
+                <NavLink to={PATHS.PRODUCTS}>Product</NavLink>
               </li>
               <li>
-                <a href="blog.html">Blog</a>
+                <NavLink to={PATHS.BLOGS}>Blog</NavLink>
               </li>
               <li>
-                <a href="contact.html">Contact Us</a>
+                <NavLink to={PATHS.CONTACT}>Contact Us</NavLink>
               </li>
             </ul>
           </nav>
@@ -119,19 +121,24 @@ const Header = () => {
                   <div className="product">
                     <div className="product-cart-details">
                       <h4 className="product-title">
-                        <a href="product-detail.html">Beige knitted</a>
+                        <NavLink href={PATHS.PRODUCTS_DETAIL}>
+                          Beige knitted
+                        </NavLink>
                       </h4>
                       <span className="cart-product-info">
                         <span className="cart-product-qty">1</span> x $84.00{" "}
                       </span>
                     </div>
                     <figure className="product-image-container">
-                      <a href="product-detail.html" className="product-image">
+                      <NavLink
+                        href={PATHS.PRODUCTS_DETAIL}
+                        className="product-image"
+                      >
                         <img
                           src="assets/images/products/cart/product-1.jpg"
                           alt="product"
                         />
-                      </a>
+                      </NavLink>
                     </figure>
                     <a href="#" className="btn-remove" title="Remove Product">
                       <i className="icon-close" />
@@ -140,19 +147,24 @@ const Header = () => {
                   <div className="product">
                     <div className="product-cart-details">
                       <h4 className="product-title">
-                        <a href="product-detail.html">Blue utility</a>
+                        <NavLink href={PATHS.PRODUCTS_DETAIL}>
+                          Blue utility
+                        </NavLink>
                       </h4>
                       <span className="cart-product-info">
                         <span className="cart-product-qty">1</span> x $76.00{" "}
                       </span>
                     </div>
                     <figure className="product-image-container">
-                      <a href="product-detail.html" className="product-image">
+                      <NavLink
+                        href={PATHS.PRODUCTS_DETAIL}
+                        className="product-image"
+                      >
                         <img
                           src="assets/images/products/cart/product-2.jpg"
                           alt="product"
                         />
-                      </a>
+                      </NavLink>
                     </figure>
                     <a href="#" className="btn-remove" title="Remove Product">
                       <i className="icon-close" />
@@ -164,13 +176,16 @@ const Header = () => {
                   <span className="cart-total-price">$160.00</span>
                 </div>
                 <div className="dropdown-cart-action">
-                  <a href="cart.html" className="btn btn-primary">
+                  <NavLink to={PATHS.CART} className="btn btn-primary">
                     View Cart
-                  </a>
-                  <a href="checkout.html" className="btn btn-outline-primary-2">
+                  </NavLink>
+                  <NavLink
+                    to={PATHS.CHECKOUT}
+                    className="btn btn-outline-primary-2"
+                  >
                     <span>Checkout</span>
                     <i className="icon-long-arrow-right" />
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
