@@ -18,6 +18,7 @@ import ReturnPage from "./pages/Returns";
 import ShippingPage from "./pages/Shipping";
 import { PATHS } from "./config/path";
 import CartPage from "./pages/Cart";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -28,9 +29,7 @@ function App() {
           <Route path={PATHS.ABOUT} element={<AboutUs />} />
           <Route path={PATHS.BLOGS} element={<BlogsPage />} />
           <Route path={PATHS.BLOGS_DETAIL} element={<BlogDetailPage />} />
-          <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
-          <Route path={PATHS.SUCCESS} element={<SuccessPage />} />
-          <Route path={PATHS.DASHBOARD} element={<DashboardPage />} />
+
           <Route path={PATHS.CONTACT} element={<ContactUsPage />} />
           <Route path={PATHS.FAQ} element={<FaqPage />} />
           <Route path={PATHS.PAYMENT} element={<PaymentMethodPage />} />
@@ -39,8 +38,13 @@ function App() {
           <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
           <Route path={PATHS.RETURN} element={<ReturnPage />} />
           <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
-          <Route path={PATHS.CART} element={<CartPage />} />
-
+          {/* Privarate Route */}
+          <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
+            <Route path={PATHS.CART} element={<CartPage />} />
+            <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
+            <Route path={PATHS.DASHBOARD} element={<DashboardPage />} />
+            <Route path={PATHS.SUCCESS} element={<SuccessPage />} />
+          </Route>
           {/* Error */}
           <Route path={PATHS.ERROR} element={<ErrorPage />} />
         </Route>

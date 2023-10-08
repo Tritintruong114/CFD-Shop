@@ -21,12 +21,15 @@ const AuthcontextProvider = ({ children }) => {
   const handleShowModal = (modalType) => {
     setIsShowModal(true);
     setShowModal(modalType || "");
-    window.document.body.classList.toggle("modal-open");
+    window.document.body.classList.add("modal-open");
   };
 
   const handleCloseModal = (e) => {
     e?.stopPropagation();
+    e?.preventDefault();
     setShowModal("");
+    setIsShowModal(false);
+    window.document.body.classList.remove("modal-open");
   };
 
   //UseEffect
@@ -57,15 +60,26 @@ const AuthcontextProvider = ({ children }) => {
         message.error("Đăng nhập thất bại");
       }
     } catch (error) {
-      console.log(error);
+      let errorStatus = error.response.status;
+      let errorMessage = error.response.data.message;
+      if (errorStatus === 404) {
+        message.error(errorMessage);
+      }
     }
   };
 
   //Handle Register Account
+
   const handleRegister = async (registerData, callback) => {
-    const { name, email, password } = registerData;
+    const { email, password } = registerData;
+    // {
+    //   "firstName": "string",
+    //   "lastName": "string",
+    //   "email": "string",
+    //   "password": "string"
+    // }
     const payload = {
-      firstName: name,
+      firstName: email,
       lastName: "",
       email,
       password,
@@ -80,7 +94,7 @@ const AuthcontextProvider = ({ children }) => {
         });
 
         message.success("Đăng kí thành công");
-        navigate("/");
+        navigate(PATHS.HOME);
       } else {
         message.error("Đăng kí thất bại");
       }

@@ -1,28 +1,30 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line react/prop-types
-const Input = ({
-  label,
-  required,
-  error,
-  renderInput = undefined,
-  ...rest
-}) => {
+
+import { forwardRef } from "react";
+
+const Input = (
+  { label, required, error, name, renderInput = undefined, ...rest },
+  ref
+) => {
   return (
     <div className="form-group">
-      <label className="label">
+      <label htmlFor={label} className={`register-${name}`}>
         {label} {required && <span>*</span>}
       </label>
       {renderInput?.({ ...rest, error }) || (
         <input
+          name={name}
+          id={name}
+          ref={ref}
           type="text"
           {...rest}
-          defaultValue
-          className={`form__input ${error ? "formerror" : ""}`}
+          className={`form-control ${error ? "input-error" : ""}`}
         />
       )}
-      {error && <p className="error">{error}</p>}
+      {error && <p className="form-error">{error}</p>}
     </div>
   );
 };
 
-export default Input;
+export default forwardRef(Input);

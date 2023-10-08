@@ -8,7 +8,7 @@ const MainContextProvider = ({ children }) => {
   const { pathname } = useLocation();
   const [isShowNavBar, setIsShowNavBar] = useState(false);
   const [menuMobile, setMenuMobile] = useState(false);
-  const [isTabPane, setIsTabPane] = useState("");
+  const [isTabPane, setIsTabPane] = useState("home");
 
   useEffect(() => {
     //
@@ -18,17 +18,12 @@ const MainContextProvider = ({ children }) => {
       behavior: "smooth",
     });
 
-    setIsShowNavBar(false);
+    setMenuMobile(false);
   }, [pathname]);
-
-  const handleShowNavBar = (isShow) => {
-    setIsShowNavBar(isShow);
-  };
 
   const handleCloseMenu = () => {
     window.document.body.classList.remove("mmenu-active");
     setMenuMobile(false);
-    console.log(isTabPane);
   };
 
   const handleShowMenu = () => {
@@ -43,12 +38,12 @@ const MainContextProvider = ({ children }) => {
     <MainContext.Provider
       value={{
         isShowNavBar,
-        handleShowNavBar,
         menuMobile,
         setMenuMobile,
         handleCloseMenu,
         handleShowMenu,
         handleToggleTabPane,
+        setIsShowNavBar,
         pathname,
         isTabPane,
       }}

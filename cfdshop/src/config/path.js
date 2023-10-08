@@ -25,4 +25,10 @@ export const PATHS = {
   ERROR: "*",
 
   //PROFILE 4 PATH
+  PROFILE: {
+    INDEX: "/profile",
+    ORDER: "/profile/order",
+    ADDRESS: "/profile/address",
+    WHISLIST: "/profile/whislist",
+  },
 };

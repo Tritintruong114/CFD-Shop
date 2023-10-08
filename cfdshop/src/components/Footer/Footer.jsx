@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="col-sm-6 col-lg-5">
               <div className="widget widget-about">
                 <img
-                  src="assets/images/logo.svg"
+                  src="/assets/images/logo.svg"
                   className="footer-logo"
                   alt="Footer Logo"
                   width={120}
@@ -100,7 +100,7 @@ const Footer = () => {
           </p>
           <figure className="footer-payments">
             <img
-              src="assets/images/payments.png"
+              src="/assets/images/payments.png"
               alt="Payment methods"
               width={272}
               height={20}

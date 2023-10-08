@@ -16,11 +16,28 @@ export const authService = {
       },
     });
   },
+  getDataProvince() {
+    return axiosInstance.get(`/provinces`);
+  },
+  getDataDistrict(id) {
+    return axiosInstance.get(`/districts?province=${id}`);
+  },
+  getDataWard(id) {
+    return axiosInstance.get(`/wards?district=${id}`);
+  },
+
   updateProfile(payload = {}) {
     return axiosInstance.put(`/customer/profiles`, payload, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+  },
+
+  getOrderMe() {
+    return axiosInstance.get(`/orders/me`);
+  },
+  review(payload = {}) {
+    return axiosInstance.get(`/reviews`, payload);
   },
 };
