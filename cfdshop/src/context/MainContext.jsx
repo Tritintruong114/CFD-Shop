@@ -7,6 +7,8 @@ const MainContext = createContext({});
 const MainContextProvider = ({ children }) => {
   const { pathname } = useLocation();
   const [isShowNavBar, setIsShowNavBar] = useState(false);
+  const [menuMobile, setMenuMobile] = useState(false);
+  const [isTabPane, setIsTabPane] = useState("");
 
   useEffect(() => {
     //
@@ -23,8 +25,34 @@ const MainContextProvider = ({ children }) => {
     setIsShowNavBar(isShow);
   };
 
+  const handleCloseMenu = () => {
+    window.document.body.classList.remove("mmenu-active");
+    setMenuMobile(false);
+    console.log(isTabPane);
+  };
+
+  const handleShowMenu = () => {
+    window.document.body.classList.add("mmenu-active");
+    setMenuMobile(true);
+  };
+
+  const handleToggleTabPane = (tab) => {
+    setIsTabPane(tab);
+  };
   return (
-    <MainContext.Provider value={{ isShowNavBar, handleShowNavBar }}>
+    <MainContext.Provider
+      value={{
+        isShowNavBar,
+        handleShowNavBar,
+        menuMobile,
+        setMenuMobile,
+        handleCloseMenu,
+        handleShowMenu,
+        handleToggleTabPane,
+        pathname,
+        isTabPane,
+      }}
+    >
       {children}
     </MainContext.Provider>
   );

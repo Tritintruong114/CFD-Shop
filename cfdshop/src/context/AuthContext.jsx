@@ -14,12 +14,16 @@ const AuthContext = createContext({});
 const AuthcontextProvider = ({ children }) => {
   const [showModal, setShowModal] = useState("");
   const [profile, setProfile] = useState({});
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const navigate = useNavigate();
   //Show modal
   const handleShowModal = (modalType) => {
+    setIsShowModal(true);
     setShowModal(modalType || "");
+    window.document.body.classList.toggle("modal-open");
   };
+
   const handleCloseModal = (e) => {
     e?.stopPropagation();
     setShowModal("");
@@ -159,6 +163,8 @@ const AuthcontextProvider = ({ children }) => {
         handleRegister,
         handleLogout,
         profile,
+        isShowModal,
+        setIsShowModal,
       }}
     >
       {children}

@@ -14,11 +14,11 @@ export const PATHS = {
   SHIPPING: "/shipping",
 
   //Blogs
-  BLOGS: "/blogs",
-  BLOGS_DETAIL: "blogs/:slug",
+  BLOGS: "/blog",
+  BLOGS_DETAIL: "blog/:slug",
 
   //Products
-  PRODUCTS: "/products",
+  PRODUCTS: "/product",
   PRODUCTS_DETAIL: "/products/:slug",
 
   //Error

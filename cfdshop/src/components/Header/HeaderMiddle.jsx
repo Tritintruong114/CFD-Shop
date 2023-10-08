@@ -1,22 +1,19 @@
 /* eslint-disable no-undef */
-import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../../config/path";
+import { useMainContext } from "../../context/MainContext";
 
 const HeaderMiddle = () => {
-  // useEffect(() => {
-  //   $(".mobile-menu-toggler").on("click", function (e) {
-  //     $body.toggleClass("mmenu-active");
-  //     $(this).toggleClass("active");
-  //     e.preventDefault();
-  //   });
-  // }, []);
+  const { handleShowMenu } = useMainContext();
 
   return (
     <div className="header-middle sticky-header">
       <div className="container">
         <div className="header-left">
-          <button className="mobile-menu-toggler">
+          <button
+            onClick={handleShowMenu}
+            className="mobile-menu-toggler active"
+          >
             <span className="sr-only">Toggle mobile menu</span>
             <i className="icon-bars" />
           </button>
