@@ -1,6 +1,11 @@
 import React from "react";
+import { useAuthContext } from "../../context/AuthContext";
+import AccountDetail from "./AccountDetail";
+import Orders from "./Orders";
 
 const DashboardPage = () => {
+  const { handleLogout, profile } = useAuthContext();
+  const { email } = profile;
   return (
     <main className="main">
       <div
@@ -45,7 +50,7 @@ const DashboardPage = () => {
                       Account Details
                     </a>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <a
                       className="nav-link"
                       id="tab-orders-link"
@@ -83,8 +88,8 @@ const DashboardPage = () => {
                     >
                       Wishlist
                     </a>
-                  </li>
-                  <li className="nav-item">
+                  </li> */}
+                  <li onClick={() => handleLogout()} className="nav-item">
                     <a className="nav-link" href="#">
                       Sign Out
                     </a>
@@ -93,186 +98,8 @@ const DashboardPage = () => {
               </aside>
               <div className="col-md-8 col-lg-9">
                 <div className="tab-content">
-                  <div
-                    className="tab-pane fade show active"
-                    id="tab-account"
-                    role="tabpanel"
-                    aria-labelledby="tab-account-link"
-                  >
-                    <form action="#" className="account-form">
-                      <div className="row">
-                        <div className="col-sm-6">
-                          <label>Full Name *</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            defaultValue="Tran"
-                            required
-                          />
-                        </div>
-                        <div className="col-sm-6">
-                          <label>Email address *</label>
-                          <input
-                            type="email"
-                            className="form-control"
-                            defaultValue="trannghia@gmail.com"
-                            disabled
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-6">
-                          <label>Phone number *</label>
-                          <input
-                            type="text"
-                            className="form-control input-error"
-                            required
-                          />
-                          <p className="form-error">
-                            Please fill in this field
-                          </p>
-                        </div>
-                        <div className="col-sm-6">
-                          <label>Ngày sinh *</label>
-                          <input
-                            type="date"
-                            className="form-control"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-sm-4">
-                          <label>Province/City *</label>
-                          <div className="select-custom">
-                            <select
-                              className="form-control form-select"
-                              id="city"
-                              aria-label="Default select example"
-                            >
-                              <option selected />
-                            </select>
-                          </div>
-                        </div>
-                        <div className="col-sm-4">
-                          <label>District/Town *</label>
-                          <div className="select-custom">
-                            <select
-                              className="form-control form-select"
-                              id="district"
-                            >
-                              <option selected />
-                            </select>
-                          </div>
-                        </div>
-                        <div className="col-sm-4">
-                          <label>Ward *</label>
-                          <div className="select-custom">
-                            <select
-                              className="form-control form-select"
-                              id="ward"
-                            >
-                              <option selected />
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <label>Street address *</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        defaultValue="30 Ba Thang Hai St."
-                        required
-                      />
-                      <label>
-                        Current password (leave blank to leave unchanged)
-                      </label>
-                      <input type="password" className="form-control" />
-                      <label>
-                        New password (leave blank to leave unchanged)
-                      </label>
-                      <input type="password" className="form-control" />
-                      <label>Confirm new password</label>
-                      <input type="password" className="form-control mb-2" />
-                      <button
-                        type="submit"
-                        className="btn btn-outline-primary-2"
-                      >
-                        <span>SAVE CHANGES</span>
-                        <i className="icon-long-arrow-right" />
-                      </button>
-                    </form>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="tab-orders"
-                    role="tabpanel"
-                    aria-labelledby="tab-orders-link"
-                  >
-                    <p>No order has been made yet.</p>
-                    <a
-                      href="category.html"
-                      className="btn btn-outline-primary-2"
-                    >
-                      <span>GO SHOP</span>
-                      <i className="icon-long-arrow-right" />
-                    </a>
-                    <br />
-                    <br />
-                    <table className="table table-cart table-mobile">
-                      <thead>
-                        <tr>
-                          <th>Product</th>
-                          <th className="text-center">Price</th>
-                          <th className="text-center">Quantity</th>
-                          <th className="text-center">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="product-col">
-                            <div className="product">
-                              <figure className="product-media">
-                                <a href="#">
-                                  <img
-                                    src="assets/images/demos/demo-3/products/product-3.jpg"
-                                    alt="Product image"
-                                  />
-                                </a>
-                              </figure>
-                              <h3 className="product-title">
-                                <a href="#">Beige knitted</a>
-                              </h3>
-                            </div>
-                          </td>
-                          <td className="price-col text-center">$84.00</td>
-                          <td className="quantity-col text-center">1 </td>
-                          <td className="total-col text-center">$84.00</td>
-                        </tr>
-                        <tr>
-                          <td className="product-col">
-                            <div className="product">
-                              <figure className="product-media">
-                                <a href="#">
-                                  <img
-                                    src="assets/images/demos/demo-3/products/product-2.jpg"
-                                    alt="Product image"
-                                  />
-                                </a>
-                              </figure>
-                              <h3 className="product-title">
-                                <a href="#">Blue utility</a>
-                              </h3>
-                            </div>
-                          </td>
-                          <td className="price-col text-center">$76.00</td>
-                          <td className="quantity-col text-center">1</td>
-                          <td className="total-col text-center">$76.00 </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  <AccountDetail {...profile} />
+                  <Orders />
                   <div
                     className="tab-pane fade"
                     id="tab-address"
@@ -290,7 +117,7 @@ const DashboardPage = () => {
                             <h3 className="card-title">Billing Address</h3>
                             <p>
                               <strong>Fullname:</strong> Tran Nghia <br />
-                              <strong>Email:</strong> trannghia@gmail.com <br />
+                              <strong>Email:</strong> {email} <br />
                               <strong>Phone number:</strong> 098 9596 912 <br />
                               <br />
                               <a href="#">

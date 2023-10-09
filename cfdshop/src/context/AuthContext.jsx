@@ -32,7 +32,7 @@ const AuthcontextProvider = ({ children }) => {
     window.document.body.classList.remove("modal-open");
   };
 
-  //UseEffect
+  //UseEffectDa
   useEffect(() => {
     const accessToken = !!tokenMethod.get()?.accessToken;
     if (accessToken) {
@@ -55,8 +55,7 @@ const AuthcontextProvider = ({ children }) => {
         navigate(PATHS.HOME);
         handleCloseModal();
         tokenMethod.set({ accessToken, refreshToken });
-
-        //Get profile
+        handleGetProfile();
       } else {
         message.error("Đăng nhập thất bại");
       }
@@ -73,14 +72,12 @@ const AuthcontextProvider = ({ children }) => {
 
   const handleRegister = async (registerData, callback) => {
     const { email, password } = registerData;
-
     const payload = {
       firstName: email,
       lastName: "",
       email,
       password,
     };
-
     try {
       const res = await authService.register(payload);
       if (res?.data?.data?.id) {
@@ -89,6 +86,7 @@ const AuthcontextProvider = ({ children }) => {
           password,
         });
 
+        handleGetProfile();
         message.success("Đăng kí thành công");
         navigate(PATHS.HOME);
       } else {
@@ -99,7 +97,7 @@ const AuthcontextProvider = ({ children }) => {
       const status = error.response.statusText;
 
       if (status === ERROR.FORBIDDEN) {
-        message.error("Địa chỉ email đã được sử dụng");
+        message.error("Địa chỉ email đã được sử dụng", { zIndexPopup: 1060 });
         handleShowModal(MODAL_TYPE.register);
       }
     }
@@ -114,11 +112,12 @@ const AuthcontextProvider = ({ children }) => {
   const handleGetProfile = async () => {
     try {
       const res = await authService.getProfile();
+
       if (res?.data.data) {
         setProfile(res.data.data);
       }
     } catch (error) {
-      handleLogout();
+      console.log(error);
     }
   };
 
@@ -163,6 +162,40 @@ const AuthcontextProvider = ({ children }) => {
   // };
   //Provider
 
+  const handleUpdataProfile = (updateDate, callback) => {
+    const { name, phone, email, address } = updateDate;
+
+    const payload = {
+      // Required
+      firstName: name,
+      lastName: "",
+      phone,
+
+      // No Required
+      facebookUrl: "",
+      website: "",
+      introduce: "",
+      birthday: "",
+      street: "",
+      province: "",
+      district: "",
+      ward: "",
+      password: "",
+      newPassword: "",
+      image: "",
+    };
+
+    try {
+      const res = authService.updateProfile(payload);
+      if (res?.data?.data) {
+        message.success("Cập nhật thành công");
+        handleGetProfile();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -171,7 +204,9 @@ const AuthcontextProvider = ({ children }) => {
         handleCloseModal,
         handleLogin,
         handleRegister,
+        handleGetProfile,
         handleLogout,
+        handleUpdataProfile,
         profile,
         isShowModal,
         setIsShowModal,

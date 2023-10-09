@@ -49,6 +49,7 @@ const LoginForm = () => {
         <Input
           label="Password"
           required
+          type="password"
           name="password"
           {...register("password", {
             required: MESSAGE.required,

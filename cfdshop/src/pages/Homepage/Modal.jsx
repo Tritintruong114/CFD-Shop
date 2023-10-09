@@ -1,53 +1,24 @@
 import LoginForm from "../../components/AuthenModal/LoginForm";
 import RegisterForm from "../../components/AuthenModal/RegisterForm";
-import Input from "../../components/Input";
 import { useAuthContext } from "../../context/AuthContext";
 import useForm from "../../hooks/useForm";
 import { regrexRule, requireRule } from "../../ultils/validate";
 
-const Modal = ({ handleFormSubmit }) => {
-  const { showModal, isShowModal, handleCloseModal, handleRegister } =
-    useAuthContext();
-
-  const rules = {
-    email: [requireRule("Vui lòng nhập Email"), regrexRule("email")],
-    password: [requireRule("Vui lòng nhập Password")],
-  };
-
-  const { form, error, register, validate } = useForm(
-    {
-      email: "",
-      password: "",
-    },
-    rules
-  );
-
-  const _onSubmit = () => {
-    const errorObject = validate(rules, form);
-
-    //Validate
-    if (Object.keys(errorObject).length > 0) {
-      console.log(errorObject);
-    } else {
-      handleFormSubmit?.(form);
-    }
-  };
+const Modal = () => {
+  const { showModal, isShowModal, handleCloseModal } = useAuthContext();
 
   return (
     <>
       <div
         className={`modal fade ${showModal ? "show" : ""}`}
         id="signin-modal"
-        tabIndex={-1}
-        role="dialog"
-        aria-hidden="true"
         style={{ display: `${isShowModal ? "block" : "none"}` }}
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-body">
               <button
-                onClick={() => handleCloseModal()}
+                onClick={(e) => handleCloseModal(e)}
                 type="button"
                 className="close"
                 data-dismiss="modal"
@@ -99,8 +70,14 @@ const Modal = ({ handleFormSubmit }) => {
             </div>
           </div>
         </div>
+        {isShowModal && (
+          <div
+            onClick={(e) => handleCloseModal(e)}
+            className="modal-backdrop fade show"
+            style={{ zIndex: -1 }}
+          ></div>
+        )}
       </div>
-      {isShowModal === true && <div className="modal-backdrop fade show"></div>}
     </>
   );
 };

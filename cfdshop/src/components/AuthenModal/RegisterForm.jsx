@@ -13,11 +13,9 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
-  console.log("handleSubmit", handleSubmit);
   const [loading, setLoading] = useState(false);
 
   const _onSubmit = (data) => {
-    console.log(data);
     if (data) {
       setLoading(true);
       handleRegister?.(data, () => {
@@ -53,6 +51,7 @@ const RegisterForm = () => {
         <Input
           label="Password"
           name="password"
+          type="password"
           required
           {...register("password", {
             required: MESSAGE.required,

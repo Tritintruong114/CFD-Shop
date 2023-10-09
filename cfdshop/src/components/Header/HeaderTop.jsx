@@ -1,14 +1,15 @@
-import { useEffect } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { tokenMethod } from "../../ultils";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../../config/path";
 import { MODAL_TYPE } from "../../config";
+import { useEffect } from "react";
 
 const HeaderTop = () => {
-  const { handleShowModal } = useAuthContext();
+  const { handleShowModal, handleLogout, profile } = useAuthContext();
 
   if (tokenMethod.get("token")) {
+    const { email } = profile;
     return (
       <div className="header-top">
         <div className="container">
@@ -22,7 +23,7 @@ const HeaderTop = () => {
               <li>
                 <a href="#" className="top-link-menu">
                   <i className="icon-user" />
-                  Tran Nghia{" "}
+                  {email}
                 </a>
                 <ul>
                   <li>
@@ -38,7 +39,7 @@ const HeaderTop = () => {
                           Wishlist <span>(3)</span>
                         </NavLink>
                       </li>
-                      <li>
+                      <li onClick={handleLogout}>
                         <NavLink to={PATHS.HOME}>Sign Out</NavLink>
                       </li>
                     </ul>
@@ -63,7 +64,7 @@ const HeaderTop = () => {
           {/* Not LogIn */}
           <ul className="top-menu top-link-menu">
             <li onClick={() => handleShowModal(MODAL_TYPE.register)}>
-              <a className="top-menu-login">
+              <a style={{ cursor: "pointer" }} className="top-menu-login">
                 <i className="icon-user"></i>Login | Resgister{" "}
               </a>
             </li>
