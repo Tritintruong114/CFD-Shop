@@ -26,12 +26,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div
-      className="tab-pane fade show active"
-      id="signin"
-      role="tabpanel"
-      aria-labelledby="signin-tab"
-    >
+    <div className="tab-pane fade show active" id="signin">
       <form onSubmit={handleSubmit(_onSubmit)} action="#">
         <Input
           label="Username or Emaill Address"

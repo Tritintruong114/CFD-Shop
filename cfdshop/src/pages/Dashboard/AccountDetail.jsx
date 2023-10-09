@@ -4,6 +4,7 @@ import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { MESSAGE, REGEX } from "../../config/validate";
 import { useAuthContext } from "../../context/AuthContext";
+
 const AccountDetail = ({ email }) => {
   const { handleGetProfile, handleUpdataProfile } = useAuthContext();
   const {

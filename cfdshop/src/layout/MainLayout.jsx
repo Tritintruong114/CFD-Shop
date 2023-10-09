@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Overlay from "../pages/Homepage/Overlay";
 import MobileMenu from "../pages/Homepage/MobileMenu";
 import { AuthcontextProvider, MainContextProvider } from "../context";
-import Modal from "../pages/Homepage/Modal";
+import Modal from "../components/AuthenModal";
 
 const MainLayout = () => {
   return (

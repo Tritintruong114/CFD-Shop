@@ -1,3 +1,4 @@
 export const ERROR = {
-  FORBIDDEN: "Forbidden",
+  FORBIDDEN: 404,
+  PASSWORDSHORT: 400,
 };

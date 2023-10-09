@@ -72,12 +72,14 @@ const AuthcontextProvider = ({ children }) => {
 
   const handleRegister = async (registerData, callback) => {
     const { email, password } = registerData;
+
     const payload = {
       firstName: email,
       lastName: "",
       email,
       password,
     };
+
     try {
       const res = await authService.register(payload);
       if (res?.data?.data?.id) {
@@ -86,18 +88,21 @@ const AuthcontextProvider = ({ children }) => {
           password,
         });
 
-        handleGetProfile();
         message.success("Đăng kí thành công");
         navigate(PATHS.HOME);
       } else {
         message.error("Đăng kí thất bại");
       }
     } catch (error) {
-      // Promise.reject(error); //
-      const status = error.response.statusText;
+      const status = error.response.data.statusCode;
+      console.log(status);
 
       if (status === ERROR.FORBIDDEN) {
         message.error("Địa chỉ email đã được sử dụng", { zIndexPopup: 1060 });
+        handleShowModal(MODAL_TYPE.register);
+      }
+      if (status === ERROR.PASSWORDSHORT) {
+        message.error("Mật khẩu phải đủ 6 kí tự", { zIndexPopup: 1060 });
         handleShowModal(MODAL_TYPE.register);
       }
     }

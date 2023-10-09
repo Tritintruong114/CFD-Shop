@@ -27,12 +27,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div
-      className="tab-pane fade"
-      id="register"
-      role="tabpanel"
-      aria-labelledby="register-tab"
-    >
+    <div className="tab-pane fade show active" id="register">
       <form onSubmit={handleSubmit(_onSubmit)} action="#">
         <Input
           label="Email Address"
@@ -64,7 +59,7 @@ const RegisterForm = () => {
             <span>SIGN UP</span>
             <i className="icon-long-arrow-right" />
           </button>
-          {/* <div className="custom-control custom-checkbox">
+          <div className="custom-control custom-checkbox">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -75,7 +70,7 @@ const RegisterForm = () => {
               I agree to the
               <a href="privacy-policy.html">privacy policy</a> *
             </label>
-          </div> */}
+          </div>
         </div>
       </form>
       {/* <div className="form-choice">
