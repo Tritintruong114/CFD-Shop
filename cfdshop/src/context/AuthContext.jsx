@@ -53,6 +53,7 @@ const AuthcontextProvider = ({ children }) => {
         //Close modal & success nofication
         message.success("Đăng nhập thành công");
         navigate(PATHS.HOME);
+        handleCloseModal();
         tokenMethod.set({ accessToken, refreshToken });
 
         //Get profile
@@ -72,12 +73,7 @@ const AuthcontextProvider = ({ children }) => {
 
   const handleRegister = async (registerData, callback) => {
     const { email, password } = registerData;
-    // {
-    //   "firstName": "string",
-    //   "lastName": "string",
-    //   "email": "string",
-    //   "password": "string"
-    // }
+
     const payload = {
       firstName: email,
       lastName: "",

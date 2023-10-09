@@ -1,7 +1,8 @@
-import { Input } from "antd";
 import React, { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
+import { MESSAGE, REGEX } from "../../config/validate";
+import Input from "../Input";
 
 const RegisterForm = () => {
   const { handleRegister } = useAuthContext();
@@ -12,9 +13,11 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
+  console.log("handleSubmit", handleSubmit);
   const [loading, setLoading] = useState(false);
 
   const _onSubmit = (data) => {
+    console.log(data);
     if (data) {
       setLoading(true);
       handleRegister?.(data, () => {
@@ -32,25 +35,37 @@ const RegisterForm = () => {
       role="tabpanel"
       aria-labelledby="register-tab"
     >
-      <form action="#">
-        <Input label="Email" name="email" required {...register("email")} />
+      <form onSubmit={handleSubmit(_onSubmit)} action="#">
+        <Input
+          label="Email Address"
+          name="email"
+          required
+          {...register("email", {
+            required: MESSAGE.required,
+            pattern: {
+              value: REGEX.email,
+              message: MESSAGE.email,
+            },
+          })}
+          error={errors?.email?.message || ""}
+        />
+
         <Input
           label="Password"
           name="password"
           required
-          {...register("password")}
+          {...register("password", {
+            required: MESSAGE.required,
+          })}
+          error={errors?.password?.message || ""}
         />
 
         <div className="form-footer">
-          <button
-            type="submit"
-            className="btn btn-outline-primary-2"
-            onClick={_onSubmit}
-          >
+          <button type="submit" className="btn btn-outline-primary-2">
             <span>SIGN UP</span>
             <i className="icon-long-arrow-right" />
           </button>
-          <div className="custom-control custom-checkbox">
+          {/* <div className="custom-control custom-checkbox">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -61,7 +76,7 @@ const RegisterForm = () => {
               I agree to the
               <a href="privacy-policy.html">privacy policy</a> *
             </label>
-          </div>
+          </div> */}
         </div>
       </form>
       {/* <div className="form-choice">
