@@ -3,7 +3,7 @@
 $(document).ready(function () {
   "use strict";
 
-  owlCarousels();
+  // owlCarousels();
   quantityInputs();
 
   // Header Search Toggle
@@ -353,7 +353,7 @@ $(document).ready(function () {
   }
 
   // Product Gallery - product-gallery.html
-  if ($.fn.owlCarousel && $.fn.elevateZoom) {
+  if ($.fn.elevateZoom) {
     var owlProductGallery = $(".product-gallery-carousel");
 
     owlProductGallery.on("initialized.owl.carousel", function () {
@@ -366,31 +366,31 @@ $(document).ready(function () {
       });
     });
 
-    owlProductGallery.owlCarousel({
-      loop: false,
-      margin: 0,
-      responsiveClass: true,
-      nav: true,
-      navText: ['<i class="icon-angle-left">', '<i class="icon-angle-right">'],
-      dots: false,
-      smartSpeed: 400,
-      autoplay: false,
-      autoplayTimeout: 15000,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        560: {
-          items: 2,
-        },
-        992: {
-          items: 3,
-        },
-        1200: {
-          items: 3,
-        },
-      },
-    });
+    // owlProductGallery.owlCarousel({
+    //   loop: false,
+    //   margin: 0,
+    //   responsiveClass: true,
+    //   nav: true,
+    //   navText: ['<i class="icon-angle-left">', '<i class="icon-angle-right">'],
+    //   dots: false,
+    //   smartSpeed: 400,
+    //   autoplay: false,
+    //   autoplayTimeout: 15000,
+    //   responsive: {
+    //     0: {
+    //       items: 1,
+    //     },
+    //     560: {
+    //       items: 2,
+    //     },
+    //     992: {
+    //       items: 3,
+    //     },
+    //     1200: {
+    //       items: 3,
+    //     },
+    //   },
+    // });
 
     owlProductGallery.on("change.owl.carousel", function () {
       $(".zoomContainer").remove();
@@ -697,22 +697,22 @@ $(document).ready(function () {
           },
           callbacks: {
             ajaxContentAdded: function () {
-              owlCarousels($(".quickView-content"), {
-                onTranslate: function (e) {
-                  var $this = $(e.target),
-                    currentIndex =
-                      ($this.data("owl.carousel").current() +
-                        e.item.count -
-                        Math.ceil(e.item.count / 2)) %
-                      e.item.count;
-                  $(".quickView-content .carousel-dot")
-                    .eq(currentIndex)
-                    .addClass("active")
-                    .siblings()
-                    .removeClass("active");
-                  $(".curidx").html(currentIndex + 1);
-                },
-              });
+              // owlCarousels($(".quickView-content"), {
+              //   onTranslate: function (e) {
+              //     var $this = $(e.target),
+              //       currentIndex =
+              //         ($this.data("owl.carousel").current() +
+              //           e.item.count -
+              //           Math.ceil(e.item.count / 2)) %
+              //         e.item.count;
+              //     $(".quickView-content .carousel-dot")
+              //       .eq(currentIndex)
+              //       .addClass("active")
+              //       .siblings()
+              //       .removeClass("active");
+              //     $(".curidx").html(currentIndex + 1);
+              //   },
+              // });
               quantityInputs();
             },
             open: function () {

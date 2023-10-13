@@ -22,6 +22,7 @@ const LoginForm = () => {
     if (data) {
       setLoading(true);
       dispatch(login(data));
+
       setTimeout(() => {
         handleCloseModal();
       }, 300);

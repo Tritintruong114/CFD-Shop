@@ -4,14 +4,10 @@ import { NavLink } from "react-router-dom";
 import { PATHS } from "../../config/path";
 import { MODAL_TYPE } from "../../config";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const HeaderTop = () => {
   const { handleShowModal, handleLogout, profile, handleGetProfile } =
     useAuthContext();
-
-  const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     handleGetProfile();

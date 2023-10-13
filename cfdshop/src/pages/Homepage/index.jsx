@@ -21,7 +21,7 @@ const HomePage = () => {
   return (
     <main className="main">
       <IntroSection {...introProps} />
-      <HotProductSection />
+      <HotProductSection {...hotProductProps} />
       <div className="mb-7 mb-lg-11" />
       {/*  */}
       <DealSection />
