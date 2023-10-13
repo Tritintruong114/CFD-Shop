@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { PATHS } from "../../config/path";
-import { useMainContext } from "../../context/MainContext";
+import { PATHS } from "../config/path";
+import { useMainContext } from "../context/MainContext";
 
 const MENULIST = [
   {

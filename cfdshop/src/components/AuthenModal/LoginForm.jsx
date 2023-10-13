@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import Input from "../Input";
 import { MESSAGE, REGEX } from "../../config/validate";
+import { login, setUser } from "../../store/reducers/authReducer";
+import { useDispatch } from "react-redux";
 const LoginForm = () => {
-  const { handleLogin } = useAuthContext();
+  const { handleCloseModal } = useAuthContext();
+
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -12,22 +18,19 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const [loading, setLoading] = useState(false);
-
   const _onSubmit = (data) => {
     if (data) {
       setLoading(true);
-      handleLogin?.(data, () => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      });
+      dispatch(login(data));
+      setTimeout(() => {
+        handleCloseModal();
+      }, 300);
     }
   };
 
   return (
     <div className="tab-pane fade show active" id="signin">
-      <form onSubmit={handleSubmit(_onSubmit)} action="#">
+      <form autoComplete="off" onSubmit={handleSubmit(_onSubmit)} action="#">
         <Input
           label="Username or Emaill Address"
           required

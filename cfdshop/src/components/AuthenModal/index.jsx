@@ -63,7 +63,7 @@ const Modal = () => {
                     </a>
                   </li>
                 </ul>
-                <div className="tab-content" id="tab-content-5">
+                <div className="tab-content">
                   {showModal === MODAL_TYPE.login && <LoginForm />}
                   {showModal === MODAL_TYPE.register && <RegisterForm />}
                 </div>

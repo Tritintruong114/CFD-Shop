@@ -1,5 +1,5 @@
 import React from "react";
-import { useMainContext } from "../../context/MainContext";
+import { useMainContext } from "../context/MainContext";
 
 const Overlay = () => {
   const { handleCloseMenu } = useMainContext();

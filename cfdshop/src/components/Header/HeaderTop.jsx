@@ -4,11 +4,20 @@ import { NavLink } from "react-router-dom";
 import { PATHS } from "../../config/path";
 import { MODAL_TYPE } from "../../config";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeaderTop = () => {
-  const { handleShowModal, handleLogout, profile } = useAuthContext();
+  const { handleShowModal, handleLogout, profile, handleGetProfile } =
+    useAuthContext();
 
-  if (tokenMethod.get("token")) {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    handleGetProfile();
+  }, []);
+
+  if (tokenMethod.get()?.accessToken) {
     const { email } = profile;
     return (
       <div className="header-top">
@@ -63,7 +72,7 @@ const HeaderTop = () => {
         <div className="header-right">
           {/* Not LogIn */}
           <ul className="top-menu top-link-menu">
-            <li onClick={() => handleShowModal(MODAL_TYPE.register)}>
+            <li onClick={() => handleShowModal(MODAL_TYPE.login)}>
               <a style={{ cursor: "pointer" }} className="top-menu-login">
                 <i className="icon-user"></i>Login | Resgister{" "}
               </a>

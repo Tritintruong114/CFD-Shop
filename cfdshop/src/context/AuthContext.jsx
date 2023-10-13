@@ -12,7 +12,7 @@ import { PATHS } from "../config/path";
 const AuthContext = createContext({});
 
 const AuthcontextProvider = ({ children }) => {
-  const [showModal, setShowModal] = useState("");
+  const [showModal, setShowModal] = useState(MODAL_TYPE.login || "");
   const [profile, setProfile] = useState({});
   const [isShowModal, setIsShowModal] = useState(false);
 
@@ -29,6 +29,7 @@ const AuthcontextProvider = ({ children }) => {
     e?.preventDefault();
     setShowModal("");
     setIsShowModal(false);
+    navigate(PATHS.HOME);
     window.document.body.classList.remove("modal-open");
   };
 
@@ -36,7 +37,7 @@ const AuthcontextProvider = ({ children }) => {
   useEffect(() => {
     const accessToken = !!tokenMethod.get()?.accessToken;
     if (accessToken) {
-      console.log("Test");
+      console.log("Have used");
     }
   }, []);
 
@@ -55,7 +56,7 @@ const AuthcontextProvider = ({ children }) => {
         navigate(PATHS.HOME);
         handleCloseModal();
         tokenMethod.set({ accessToken, refreshToken });
-        handleGetProfile();
+        // handleGetProfile();
       } else {
         message.error("Đăng nhập thất bại");
       }

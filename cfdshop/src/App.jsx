@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import HomePage from "./pages/Homepage";
@@ -19,37 +20,39 @@ import ShippingPage from "./pages/Shipping";
 import { PATHS } from "./config/path";
 import CartPage from "./pages/Cart";
 import PrivateRoute from "./components/PrivateRoute";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { increment, decrement } from "./store/actions/counterAction";
+import { fetchRandomDog } from "./store/actions/dogActions";
+import { useEffect } from "react";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={PATHS.HOME} element={<MainLayout />}>
-          <Route path={PATHS.HOME} element={<HomePage />} />
-          <Route path={PATHS.ABOUT} element={<AboutUs />} />
-          <Route path={PATHS.BLOGS} element={<BlogsPage />} />
-          <Route path={PATHS.BLOGS_DETAIL} element={<BlogDetailPage />} />
+    <Routes>
+      <Route path={PATHS.HOME} element={<MainLayout />}>
+        <Route path={PATHS.HOME} element={<HomePage />} />
+        <Route path={PATHS.ABOUT} element={<AboutUs />} />
+        <Route path={PATHS.BLOGS} element={<BlogsPage />} />
+        <Route path={PATHS.BLOGS_DETAIL} element={<BlogDetailPage />} />
 
-          <Route path={PATHS.CONTACT} element={<ContactUsPage />} />
-          <Route path={PATHS.FAQ} element={<FaqPage />} />
-          <Route path={PATHS.PAYMENT} element={<PaymentMethodPage />} />
-          <Route path={PATHS.PRIVACY} element={<PrivacyPage />} />
-          <Route path={PATHS.PRODUCTS} element={<Products />} />
-          <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
-          <Route path={PATHS.RETURN} element={<ReturnPage />} />
-          <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
-          {/* Privarate Route */}
-          <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
-            <Route path={PATHS.CART} element={<CartPage />} />
-            <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
-            <Route path={PATHS.DASHBOARD} element={<DashboardPage />} />
-            <Route path={PATHS.SUCCESS} element={<SuccessPage />} />
-          </Route>
-          {/* Error */}
-          <Route path={PATHS.ERROR} element={<ErrorPage />} />
+        <Route path={PATHS.CONTACT} element={<ContactUsPage />} />
+        <Route path={PATHS.FAQ} element={<FaqPage />} />
+        <Route path={PATHS.PAYMENT} element={<PaymentMethodPage />} />
+        <Route path={PATHS.PRIVACY} element={<PrivacyPage />} />
+        <Route path={PATHS.PRODUCTS} element={<Products />} />
+        <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
+        <Route path={PATHS.RETURN} element={<ReturnPage />} />
+        <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
+        {/* Privarate Route */}
+        <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
+          <Route path={PATHS.CART} element={<CartPage />} />
+          <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
+          <Route path={PATHS.DASHBOARD} element={<DashboardPage />} />
+          <Route path={PATHS.SUCCESS} element={<SuccessPage />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+        {/* Error */}
+        <Route path={PATHS.ERROR} element={<ErrorPage />} />
+      </Route>
+    </Routes>
   );
 }
 
