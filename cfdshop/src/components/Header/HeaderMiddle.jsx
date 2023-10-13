@@ -1,12 +1,20 @@
 /* eslint-disable no-undef */
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { PATHS } from "../../config/path";
 import { useMainContext } from "../../context/MainContext";
 import { useEffect } from "react";
 
+const MENULIST = [
+  { name: "Home", path: PATHS.HOME },
+  { name: "About Us", path: PATHS.ABOUT },
+  { name: "Product", path: PATHS.PRODUCTS },
+  { name: "Blog", path: PATHS.BLOGS },
+  { name: "Contact Us", path: PATHS.CONTACT },
+];
 const HeaderMiddle = () => {
   const { handleShowMenu } = useMainContext();
-
+  const pathName = useLocation().pathname;
+  console.log(pathName);
   useEffect(() => {
     var $searchWrapper = $(".header-search-wrapper"),
       $body = $("body"),
@@ -81,21 +89,16 @@ const HeaderMiddle = () => {
         </div>
         <nav className="main-nav">
           <ul className="menu">
-            <li className="active">
-              <NavLink to={PATHS.HOME}>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to={PATHS.ABOUT}>About Us</NavLink>
-            </li>
-            <li>
-              <NavLink to={PATHS.PRODUCTS}>Product</NavLink>
-            </li>
-            <li>
-              <NavLink to={PATHS.BLOGS}>Blog</NavLink>
-            </li>
-            <li>
-              <NavLink to={PATHS.CONTACT}>Contact Us</NavLink>
-            </li>
+            {MENULIST.map((menu, index) => {
+              return (
+                <li
+                  className={menu.path === pathName ? "active" : ""}
+                  key={index}
+                >
+                  <NavLink to={menu.path}>{menu.name}</NavLink>
+                </li>
+              );
+            })}
           </ul>
         </nav>
         <div className="header-right">

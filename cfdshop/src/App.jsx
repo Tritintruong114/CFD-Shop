@@ -24,6 +24,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { increment, decrement } from "./store/actions/counterAction";
 import { fetchRandomDog } from "./store/actions/dogActions";
 import { useEffect } from "react";
+import ProductsList from "./pages/Product/Product-list";
 
 function App() {
   return (
@@ -38,8 +39,11 @@ function App() {
         <Route path={PATHS.FAQ} element={<FaqPage />} />
         <Route path={PATHS.PAYMENT} element={<PaymentMethodPage />} />
         <Route path={PATHS.PRIVACY} element={<PrivacyPage />} />
-        <Route path={PATHS.PRODUCTS} element={<Products />} />
-        <Route path={PATHS.PRODUCTS_DETAIL} element={<ProductDetail />} />
+
+        <Route path={PATHS.PRODUCTS} element={<Products />}>
+          <Route index element={<ProductsList />} />
+          <Route path=":slug" element={<ProductDetail />} />
+        </Route>
         <Route path={PATHS.RETURN} element={<ReturnPage />} />
         <Route path={PATHS.SHIPPING} element={<ShippingPage />} />
         {/* Privarate Route */}

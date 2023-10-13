@@ -1,6 +1,5 @@
 // services/authService.js
 import axiosInstance from "../ultils/axiosInstance";
-import tokenMethod from "../ultils/token";
 
 export const authService = {
   login(payload = {}) {
