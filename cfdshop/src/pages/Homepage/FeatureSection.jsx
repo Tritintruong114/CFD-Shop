@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import owlCarousels from "../../ultils/owlCarousel";
 
-const FeatureSection = () => {
+const FeatureSection = ({
+  categories,
+  featureProducts,
+  selectedCateSlug,
+  handleSelectCate,
+}) => {
+  useEffect(() => {
+    owlCarousels();
+  }, [selectedCateSlug]);
+
+  const _onSelectCate = (e, slug) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleSelectCate?.("");
+    setTimeout(() => {
+      handleSelectCate?.(slug);
+    }, 200);
+  };
   return (
     <div className="container top">
       <div className="heading heading-flex mb-3">

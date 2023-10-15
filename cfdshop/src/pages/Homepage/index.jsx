@@ -24,15 +24,15 @@ const HomePage = () => {
       <HotProductSection {...hotProductProps} />
       <div className="mb-7 mb-lg-11" />
       {/*  */}
-      <DealSection />
-      <BrandSection />
+      <DealSection {...dealProps} />
+      <BrandSection {...brandProps} />
       <div className="container">
         <hr className="mt-3 mb-6" />
       </div>
       <div className="container">
         <hr className="mt-5 mb-6" />
       </div>
-      <FeatureSection />
+      <FeatureSection {...featuredProps} />
       <div className="container">
         <hr className="mt-5 mb-0" />
       </div>
