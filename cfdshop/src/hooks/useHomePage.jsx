@@ -1,7 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { productService } from "../services/productService";
 import useQuery from "./useQuery";
 import { pageService } from "../services/pageService";
+import { subscribeService } from "../services/subcribeService";
+import useMutation from "./useMutation";
+import { GENERAL_MESSAGE, HOME_MESSAGE } from "../config/validate";
+import { message } from "antd";
 
 const useHomePage = () => {
   const { data: productsData } = useQuery(productService.getProducts);
@@ -54,12 +59,41 @@ const useHomePage = () => {
       : products?.filter(
           (product) => product?.category?.slug === selectedCateSlug
         );
+
   const featuredProps = {
     categories: [{ name: "All", slug: "all" }, ...categories],
     featureProducts,
     selectedCateSlug,
     handleSelectCate: (slug) => setSelectedCateSlug(slug),
   };
+
+  // ServiceSection
+  const services = homeData?.data?.information || {};
+
+  const serviceProps = {
+    services,
+  };
+
+  // GetDealSection
+  const { execute: dealExecute } = useMutation(subscribeService.subscribeDeal);
+
+  const handleSubscribeDeal = (email, callback) => {
+    if (email) {
+      dealExecute(email, {
+        onSuccess: (data) => {
+          message.success(HOME_MESSAGE.dealSuccess);
+          callback?.();
+        },
+        onFail: (error) => {
+          message.error(GENERAL_MESSAGE.error);
+        },
+      });
+    }
+  };
+  const getDealProps = {
+    handleSubscribeDeal,
+  };
+
   return {
     /* These are the properties that are being returned by the `useHomePage` hook. Each property
   represents a set of data or functions that can be used in the home page component. */
@@ -68,8 +102,8 @@ const useHomePage = () => {
     dealProps,
     brandProps,
     featuredProps,
-    // serviceProps,
-    // getDealProps,
+    serviceProps,
+    getDealProps,
   };
 };
 

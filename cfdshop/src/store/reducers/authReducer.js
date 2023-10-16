@@ -20,8 +20,6 @@ export const login = createAsyncThunk(
 
       const profileRes = await authService.getProfile();
 
-      console.log(profileRes);
-
       thunkApi.dispatch(setUser(profileRes?.data?.data));
 
       return profileRes?.data?.data;

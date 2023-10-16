@@ -1,20 +1,32 @@
-import { useAuthContext } from "../../context/AuthContext";
-import { tokenMethod } from "../../ultils";
-import { NavLink } from "react-router-dom";
-import { PATHS } from "../../config/path";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MODAL_TYPE } from "../../config";
-import { useEffect } from "react";
+import { PATHS } from "../../config/path";
+import { handleLogout, handleShowModal } from "../../slices/authSlice";
+import { tokenMethod } from "../../ultils";
 
 const HeaderTop = () => {
-  const { handleShowModal, handleLogout, profile, handleGetProfile } =
-    useAuthContext();
+  // const { handleShowModal, handleLogout, profile, handleGetProfile } =
+  //   useAuthContext();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    handleGetProfile();
-  }, []);
+  const { profile, showedModal } = useSelector((state) => state.auth);
+  const { firstName, email } = profile || {};
+
+  const _onShowAuthModal = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    // handleShowModal?.(MODAL_TYPES.login);
+    dispatch(handleShowModal(MODAL_TYPE.login));
+  };
+  const _onSignOut = (e) => {
+    e.preventDefault();
+    dispatch(handleLogout());
+    navigate(PATHS.HOME);
+  };
 
   if (tokenMethod.get()?.accessToken) {
-    const { email } = profile;
     return (
       <div className="header-top">
         <div className="container">
@@ -44,7 +56,7 @@ const HeaderTop = () => {
                           Wishlist <span>(3)</span>
                         </NavLink>
                       </li>
-                      <li onClick={handleLogout}>
+                      <li onClick={_onSignOut}>
                         <NavLink to={PATHS.HOME}>Sign Out</NavLink>
                       </li>
                     </ul>
@@ -68,7 +80,7 @@ const HeaderTop = () => {
         <div className="header-right">
           {/* Not LogIn */}
           <ul className="top-menu top-link-menu">
-            <li onClick={() => handleShowModal(MODAL_TYPE.login)}>
+            <li onClick={_onShowAuthModal}>
               <a style={{ cursor: "pointer" }} className="top-menu-login">
                 <i className="icon-user"></i>Login | Resgister{" "}
               </a>

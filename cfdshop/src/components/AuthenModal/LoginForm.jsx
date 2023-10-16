@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../../context/AuthContext";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Input from "../Input";
-import { MESSAGE, REGEX } from "../../config/validate";
-import { login, setUser } from "../../store/reducers/authReducer";
 import { useDispatch } from "react-redux";
+import { MESSAGE, REGEX } from "../../config/validate";
+import { useAuthContext } from "../../context/AuthContext";
+import { login } from "../../store/reducers/authReducer";
+import Input from "../Input";
 const LoginForm = () => {
   const { handleCloseModal } = useAuthContext();
 

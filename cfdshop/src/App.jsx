@@ -1,30 +1,26 @@
 /* eslint-disable react/prop-types */
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import { PATHS } from "./config/path";
 import MainLayout from "./layout/MainLayout";
-import HomePage from "./pages/Homepage";
-import AboutUs from "./pages/Aboutus";
 import ErrorPage from "./pages/404";
+import AboutUs from "./pages/Aboutus";
 import BlogsPage from "./pages/Blog";
 import BlogDetailPage from "./pages/Blog/Blog-detail";
+import CartPage from "./pages/Cart";
 import CheckOutPage from "./pages/Checkout";
-import SuccessPage from "./pages/Success";
-import DashboardPage from "./pages/Dashboard";
 import ContactUsPage from "./pages/Contact";
+import DashboardPage from "./pages/Dashboard";
 import FaqPage from "./pages/Faq";
+import HomePage from "./pages/Homepage";
 import PaymentMethodPage from "./pages/PaymentMethod";
 import PrivacyPage from "./pages/Privacy";
 import Products from "./pages/Product";
 import ProductDetail from "./pages/Product/Product-detail";
+import ProductsList from "./pages/Product/Product-list";
 import ReturnPage from "./pages/Returns";
 import ShippingPage from "./pages/Shipping";
-import { PATHS } from "./config/path";
-import CartPage from "./pages/Cart";
-import PrivateRoute from "./components/PrivateRoute";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "./store/actions/counterAction";
-import { fetchRandomDog } from "./store/actions/dogActions";
-import { useEffect } from "react";
-import ProductsList from "./pages/Product/Product-list";
+import SuccessPage from "./pages/Success";
 
 function App() {
   return (
