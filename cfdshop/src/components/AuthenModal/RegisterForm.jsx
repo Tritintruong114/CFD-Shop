@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { useAuthContext } from "../../context/AuthContext";
+import React, { Component, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MESSAGE, REGEX } from "../../config/validate";
 import Input from "../Input";
+import { useDispatch, useSelector } from "react-redux";
+import { handleRegister } from "../../slices/authSlice";
+import ComponentLoading from "../ComponentLoading";
 
 const RegisterForm = () => {
-  const { handleRegister } = useAuthContext();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
 
   const {
     register,
@@ -13,21 +16,19 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
-  const [loading, setLoading] = useState(false);
-
   const _onSubmit = (data) => {
     if (data) {
-      setLoading(true);
-      handleRegister?.(data, () => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      });
+      dispatch(handleRegister(data));
     }
   };
 
   return (
-    <div className="tab-pane fade show active" id="register">
+    <div
+      style={{ position: "relative", zIndex: 1 }}
+      className="tab-pane fade show active"
+      id="register"
+    >
+      {loading.register === true && <ComponentLoading />}
       <form onSubmit={handleSubmit(_onSubmit)} action="#">
         <Input
           label="Email Address"
@@ -59,7 +60,7 @@ const RegisterForm = () => {
             <span>SIGN UP</span>
             <i className="icon-long-arrow-right" />
           </button>
-          <div className="custom-control custom-checkbox">
+          {/* <div className="custom-control custom-checkbox">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -70,26 +71,9 @@ const RegisterForm = () => {
               I agree to the
               <a href="privacy-policy.html">privacy policy</a> *
             </label>
-          </div>
+          </div> */}
         </div>
       </form>
-      {/* <div className="form-choice">
-                        <p className="text-center">or sign in with</p>
-                        <div className="row">
-                          <div className="col-sm-6">
-                            <a href="#" className="btn btn-login btn-g">
-                              <i className="icon-google" />
-                              Login With Google
-                            </a>
-                          </div>
-                          <div className="col-sm-6">
-                            <a href="#" className="btn btn-login  btn-f">
-                              <i className="icon-facebook-f" />
-                              Login With Facebook
-                            </a>
-                          </div>
-                        </div>
-                      </div> */}
     </div>
   );
 };

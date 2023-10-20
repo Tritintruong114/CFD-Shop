@@ -69,8 +69,16 @@ export const authSlice = createSlice({
 export const handleRegister = createAsyncThunk(
   "auth/handleRegister",
   async (payload, thunkApi) => {
+    //Prepare data
+    const data = {
+      firstName: "",
+      lastName: "",
+      email: payload.email,
+      password: payload.password,
+    };
+
     try {
-      const registerRes = await authService.register(payload);
+      const registerRes = await authService.register(data);
       if (registerRes?.data?.data?.id) {
         message.success("Đăng ký thành công");
         thunkApi.dispatch(

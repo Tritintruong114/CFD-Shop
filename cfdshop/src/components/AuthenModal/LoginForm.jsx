@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MESSAGE, REGEX } from "../../config/validate";
 import { useAuthContext } from "../../context/AuthContext";
-import { login } from "../../store/reducers/authReducer";
 import Input from "../Input";
+import { handleLogin } from "../../slices/authSlice";
+import ComponentLoading from "../ComponentLoading";
 const LoginForm = () => {
-  const { handleCloseModal } = useAuthContext();
-
   const dispatch = useDispatch();
-
-  const [loading, setLoading] = useState(false);
+  const { loading } = useSelector((state) => state.auth);
 
   const {
     register,
@@ -20,17 +18,17 @@ const LoginForm = () => {
 
   const _onSubmit = (data) => {
     if (data) {
-      setLoading(true);
-      dispatch(login(data));
-
-      setTimeout(() => {
-        handleCloseModal();
-      }, 300);
+      dispatch(handleLogin(data));
     }
   };
 
   return (
-    <div className="tab-pane fade show active" id="signin">
+    <div
+      style={{ position: "relative", zIndex: 1 }}
+      className="tab-pane fade show active"
+      id="signin"
+    >
+      {loading.login === true && <ComponentLoading />}
       <form autoComplete="off" onSubmit={handleSubmit(_onSubmit)} action="#">
         <Input
           label="Username or Emaill Address"
