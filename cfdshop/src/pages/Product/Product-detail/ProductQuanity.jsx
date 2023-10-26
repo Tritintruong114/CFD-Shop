@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, {
@@ -32,15 +33,9 @@ const ProductQuanity = (
   useImperativeHandle(ref, () => {
     return {
       value: currentQuantity,
-      reset: () => {
-        setCurrentQuantity(defaultValue ?? 1);
-      },
+      reset: () => setCurrentQuantity(1),
     };
   });
-
-  useEffect(() => {
-    onChange?.(currentQuantity);
-  }, [currentQuantity]);
 
   const _onDecrease = () => {
     const value = _modifyValue(Number(currentQuantity) - Number(step));
@@ -65,6 +60,11 @@ const ProductQuanity = (
       return value;
     }
   };
+
+  useEffect(() => {
+    onChange?.(currentQuantity);
+  }, [currentQuantity]);
+
   return (
     <div className="product-details-quantity">
       <div className="input-group input-spinner">

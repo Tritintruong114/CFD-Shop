@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { forwardRef, useImperativeHandle, useState } from "react";
 
@@ -36,4 +37,5 @@ const ProductColor = ({ colors, defaultColor, onChange }, ref) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default forwardRef(ProductColor);

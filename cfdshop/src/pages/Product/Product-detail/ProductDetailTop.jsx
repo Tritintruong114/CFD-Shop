@@ -28,7 +28,6 @@ const ProductDetailTop = ({
   const pathUrl = window.location.href;
   const categoryPath =
     category?.id && PATHS.PRODUCTS + `?category=${category?.id}`;
-
   const _onAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();

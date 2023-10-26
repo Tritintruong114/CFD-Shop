@@ -10,7 +10,6 @@ const useProducDetailPage = () => {
   const { slug } = useParams();
   const colorRef = useRef();
   const quantityRef = useRef();
-  console.log(quantityRef);
 
   const { data: productDetailData } = useQuery(
     () => productService.getProductBySlug(slug),
@@ -31,10 +30,11 @@ const useProducDetailPage = () => {
     if (!color) {
       message.error("Please choose color");
       return;
-    } else if (!isNaN(quantity) && quantity < 1) {
+    } else if (isNaN(quantity) && quantity < 1) {
       message.error("Quanity must be greater than 1");
       return;
     }
+    //Call API add to card
 
     colorReset?.();
     quantityReset?.();
