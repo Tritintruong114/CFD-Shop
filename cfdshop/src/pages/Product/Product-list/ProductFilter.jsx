@@ -1,12 +1,75 @@
-import React from "react";
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useRef } from "react";
+import CheckBox from "../../../components/Checkbox";
 
-const ProductFilter = () => {
+const ProductFilter = ({
+  categories,
+  isLoading,
+  isError,
+  activeCategory,
+  onCateFilterchange,
+  handePriceFilterChange,
+  currentPriceRange,
+}) => {
+  const myPriceFilterTimeOut = useRef();
+  const onFilterChange = (id, isChecked) => {
+    // if (isChecked) {
+    //   onCateFilterchange(id);
+    // } else {
+    //   onCateFilterchange("");
+    // }
+    onCateFilterchange(id, isChecked);
+  };
+
+  useEffect(() => {
+    if (typeof noUiSlider === "object") {
+      var priceSlider = document.getElementById("price-slider");
+
+      // Check if #price-slider elem is exists if not return
+      // to prevent error logs
+      if (priceSlider == null) return;
+
+      noUiSlider.create(priceSlider, {
+        start: currentPriceRange,
+        connect: true,
+        step: 50,
+        margin: 200,
+        range: {
+          min: 0,
+          max: 1000,
+        },
+        tooltips: true,
+        format: wNumb({
+          decimals: 0,
+          prefix: "$",
+        }),
+      });
+
+      // Update Price Range
+      priceSlider.noUiSlider.on("update", function (values, handle) {
+        $("#filter-price-range").text(values.join(" - "));
+        if (myPriceFilterTimeOut.current) {
+          clearTimeout(myPriceFilterTimeOut.current);
+        }
+        myPriceFilterTimeOut.current = setTimeout(() => {
+          handePriceFilterChange(values.map((item) => item.substring(1)));
+        }, 500);
+      });
+    }
+  }, []);
+
   return (
     <aside className="col-lg-3 order-lg-first">
       <div className="sidebar sidebar-shop">
         <div className="widget widget-clean">
           <label>Filters:</label>
-          <a href="#" className="sidebar-filter-clear">
+          <a
+            role="button"
+            onClick={() => onCateFilterchange("")}
+            className="sidebar-filter-clear"
+          >
             Clean All
           </a>
         </div>
@@ -26,71 +89,20 @@ const ProductFilter = () => {
           <div className="collapse show" id="widget-1">
             <div className="widget-body">
               <div className="filter-items filter-items-count">
-                <div className="filter-item">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="cat-1"
-                    />
-                    <label className="custom-control-label" htmlFor="cat-1">
-                      TV
-                    </label>
-                  </div>
-                  <span className="item-count">3</span>
-                </div>
-                <div className="filter-item">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="cat-2"
-                    />
-                    <label className="custom-control-label" htmlFor="cat-2">
-                      Computers
-                    </label>
-                  </div>
-                  <span className="item-count">0</span>
-                </div>
-                <div className="filter-item">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="cat-3"
-                    />
-                    <label className="custom-control-label" htmlFor="cat-3">
-                      Tablets &amp; Cell Phones
-                    </label>
-                  </div>
-                  <span className="item-count">4</span>
-                </div>
-                <div className="filter-item">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="cat-4"
-                    />
-                    <label className="custom-control-label" htmlFor="cat-4">
-                      Smartwatches
-                    </label>
-                  </div>
-                  <span className="item-count">2</span>
-                </div>
-                <div className="filter-item">
-                  <div className="custom-control custom-checkbox">
-                    <input
-                      type="checkbox"
-                      className="custom-control-input"
-                      id="cat-5"
-                    />
-                    <label className="custom-control-label" htmlFor="cat-5">
-                      Accessories
-                    </label>
-                  </div>
-                  <span className="item-count">2</span>
-                </div>
+                {categories?.map((category, index) => {
+                  return (
+                    <div key={index} className="filter-item">
+                      <CheckBox
+                        id={category.id || index}
+                        label={category.name || ""}
+                        checked={activeCategory?.includes(category?.id)}
+                        onChange={(e) =>
+                          onFilterChange(e.target.id, e.target.checked)
+                        }
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 const useMutation = (promise) => {
+  console.log(promise);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();

@@ -179,34 +179,34 @@ $(document).ready(function () {
   }
 
   // Slider For category pages / filter price
-  if (typeof noUiSlider === "object") {
-    var priceSlider = document.getElementById("price-slider");
+  // if (typeof noUiSlider === "object") {
+  //   var priceSlider = document.getElementById("price-slider");
 
-    // Check if #price-slider elem is exists if not return
-    // to prevent error logs
-    if (priceSlider == null) return;
+  //   // Check if #price-slider elem is exists if not return
+  //   // to prevent error logs
+  //   if (priceSlider == null) return;
 
-    noUiSlider.create(priceSlider, {
-      start: [0, 750],
-      connect: true,
-      step: 50,
-      margin: 200,
-      range: {
-        min: 0,
-        max: 1000,
-      },
-      tooltips: true,
-      format: wNumb({
-        decimals: 0,
-        prefix: "$",
-      }),
-    });
+  //   noUiSlider.create(priceSlider, {
+  //     start: [0, 750],
+  //     connect: true,
+  //     step: 50,
+  //     margin: 200,
+  //     range: {
+  //       min: 0,
+  //       max: 1000,
+  //     },
+  //     tooltips: true,
+  //     format: wNumb({
+  //       decimals: 0,
+  //       prefix: "$",
+  //     }),
+  //   });
 
-    // Update Price Range
-    priceSlider.noUiSlider.on("update", function (values, handle) {
-      $("#filter-price-range").text(values.join(" - "));
-    });
-  }
+  //   // Update Price Range
+  //   priceSlider.noUiSlider.on("update", function (values, handle) {
+  //     $("#filter-price-range").text(values.join(" - "));
+  //   });
+  // }
 
   // Product countdown
   if ($.fn.countdown) {
@@ -309,48 +309,48 @@ $(document).ready(function () {
   // }
 
   // Product Image Zoom plugin - product pages
-  if ($.fn.elevateZoom) {
-    $("#product-zoom").elevateZoom({
-      gallery: "product-zoom-gallery",
-      galleryActiveClass: "active",
-      zoomType: "inner",
-      cursor: "crosshair",
-      zoomWindowFadeIn: 400,
-      zoomWindowFadeOut: 400,
-      responsive: true,
-    });
+  // if ($.fn.elevateZoom) {
+  //   $("#product-zoom").elevateZoom({
+  //     gallery: "product-zoom-gallery",
+  //     galleryActiveClass: "active",
+  //     zoomType: "inner",
+  //     cursor: "crosshair",
+  //     zoomWindowFadeIn: 400,
+  //     zoomWindowFadeOut: 400,
+  //     responsive: true,
+  //   });
 
-    // On click change thumbs active item
-    $(".product-gallery-item").on("click", function (e) {
-      $("#product-zoom-gallery").find("a").removeClass("active");
-      $(this).addClass("active");
+  //   // On click change thumbs active item
+  //   $(".product-gallery-item").on("click", function (e) {
+  //     $("#product-zoom-gallery").find("a").removeClass("active");
+  //     $(this).addClass("active");
 
-      e.preventDefault();
-    });
+  //     e.preventDefault();
+  //   });
 
-    var ez = $("#product-zoom").data("elevateZoom");
+  //   var ez = $("#product-zoom").data("elevateZoom");
 
-    // Open popup - product images
-    $("#btn-product-gallery").on("click", function (e) {
-      if ($.fn.magnificPopup) {
-        $.magnificPopup.open(
-          {
-            items: ez.getGalleryList(),
-            type: "image",
-            gallery: {
-              enabled: true,
-            },
-            fixedContentPos: false,
-            removalDelay: 600,
-            closeBtnInside: false,
-          },
-          0
-        );
+  //   // Open popup - product images
+  //   $("#btn-product-gallery").on("click", function (e) {
+  //     if ($.fn.magnificPopup) {
+  //       $.magnificPopup.open(
+  //         {
+  //           items: ez.getGalleryList(),
+  //           type: "image",
+  //           gallery: {
+  //             enabled: true,
+  //           },
+  //           fixedContentPos: false,
+  //           removalDelay: 600,
+  //           closeBtnInside: false,
+  //         },
+  //         0
+  //       );
 
-        e.preventDefault();
-      }
-    });
-  }
+  //       e.preventDefault();
+  //     }
+  //   });
+  // }
 
   // Product Gallery - product-gallery.html
   if ($.fn.elevateZoom) {
