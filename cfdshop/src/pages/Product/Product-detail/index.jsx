@@ -9,7 +9,6 @@ const ProductDetail = () => {
   const { productName, productDetailTopProps, productDetailTabProps } =
     useProducDetailPage();
 
-  console.log(productName, productDetailTabProps, productDetailTopProps);
   return (
     <main className="main">
       <nav aria-label="breadcrumb" className="breadcrumb-nav border-0 mb-0">
@@ -30,7 +29,7 @@ const ProductDetail = () => {
       <div className="page-content">
         <div className="container">
           <ProductDetailTop {...productDetailTopProps} />
-          {/* <ProductDetailBot {...productDetailTabProps} /> */}
+          <ProductDetailBot {...productDetailTabProps} />
         </div>
       </div>
     </main>

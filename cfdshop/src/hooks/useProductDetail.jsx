@@ -5,25 +5,29 @@ import useQuery from "./useQuery";
 import { productService } from "../services/productService";
 import { useParams } from "react-router-dom";
 import { message } from "antd";
+import { handleAddCart } from "../store/reducers/cartReducer";
+import { useDispatch } from "react-redux";
 
 const useProducDetailPage = () => {
   const { slug } = useParams();
   const colorRef = useRef();
   const quantityRef = useRef();
+  const dispatch = useDispatch();
 
   const { data: productDetailData } = useQuery(
     () => productService.getProductBySlug(slug),
     [slug]
   );
 
-  const { id, name, describtion, shippingReturn } = productDetailData || {};
+  const { id, name, description, shippingReturn, price, discount } =
+    productDetailData || {};
 
   const { data: productDetailPreview } = useQuery(
     () => id && productService.getProductReview(id),
     [id]
   );
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const { value: color, reset: colorReset } = colorRef.current || {};
     const { value: quantity, reset: quantityReset } = quantityRef.current || {};
 
@@ -35,9 +39,22 @@ const useProducDetailPage = () => {
       return;
     }
     //Call API add to card
+    const addPayload = {
+      addId: id,
+      addColor: color,
+      addQuanity: quantity,
+      addPrice: price - discount,
+    };
 
-    colorReset?.();
-    quantityReset?.();
+    try {
+      const res = dispatch(handleAddCart(addPayload)).unwrap();
+      if (res) {
+        colorReset?.();
+        quantityReset?.();
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   const handleAddToWhislist = () => {
@@ -54,9 +71,9 @@ const useProducDetailPage = () => {
   };
 
   const productDetailTabProps = {
-    describtion,
+    description,
     shippingReturn,
-    review: productDetailPreview,
+    reviews: productDetailPreview,
   };
 
   return {

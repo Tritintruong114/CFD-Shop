@@ -26,9 +26,11 @@
 import { ENV } from "../config/enviroment";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../slices/authSlice";
+import cartReducer from "./reducers/cartReducer";
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    cart: cartReducer,
   },
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(thunkMiddleware),

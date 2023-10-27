@@ -21,8 +21,26 @@ import ProductsList from "./pages/Product/Product-list";
 import ReturnPage from "./pages/Returns";
 import ShippingPage from "./pages/Shipping";
 import SuccessPage from "./pages/Success";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { message } from "antd";
+import { handleGetProfile } from "./slices/authSlice";
+import { handleGetCart } from "./store/reducers/cartReducer";
+import { tokenMethod } from "./ultils";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    message.config({
+      top: 80,
+      duration: 3,
+      maxCount: 3,
+    });
+    if (tokenMethod.get()) {
+      dispatch(handleGetProfile());
+      dispatch(handleGetCart());
+    }
+  }, []);
   return (
     <Routes>
       <Route path={PATHS.HOME} element={<MainLayout />}>
